@@ -19,10 +19,10 @@ Update `DATABASE_URL` env to match your database connection
 Add Project Dependencies:
 ### `yarn install` 
 
-Run Prisma migrations
+Run Prisma migrations:
 ### `yarn prisma migrate deploy` 
 
-Add Prisma generated files
+Add Prisma generated files:
 ### `yarn prisma generate` 
 
 Run the Project:
