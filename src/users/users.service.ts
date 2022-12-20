@@ -3,6 +3,7 @@ import { PrismaService } from 'src/database/PrismaService';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { LogoffDto } from './dto/logoff.dto';
+import { RateDto } from './dto/rate.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
@@ -64,6 +65,35 @@ export class UsersService {
     });
   }
 
+  async rate(data: RateDto) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        ra: data.ra,
+      },
+    });
+
+    if (!user) {
+      throw new HttpException('User not found', 404);
+    }
+    const rider = await this.prisma.user.findUnique({
+      where: {
+        ra: data.ra_rider,
+      },
+    });
+
+    if (!rider) {
+      throw new HttpException('User not found', 404);
+    }
+
+    return this.prisma.user.update({
+      where: {
+        ra: data.ra_rider,
+      },
+      data: {
+        stars: data.stars,
+      },
+    });
+  }
   findAll() {
     return `This action returns all users`;
   }

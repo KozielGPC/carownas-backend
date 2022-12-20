@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { CarRidesService } from './car-rides.service';
 import { CreateCarRideDto } from './dto/create-car-ride.dto';
+import { TakeCarRideDto } from './dto/take-car-ride.dto';
 import { UpdateCarRideDto } from './dto/update-car-ride.dto';
 
 @Controller('car-rides')
@@ -17,8 +18,6 @@ export class CarRidesController {
 
   @Post()
   create(@Body() createCarRideDto: CreateCarRideDto) {
-    console.log(createCarRideDto);
-
     return this.carRidesService.create(createCarRideDto);
   }
 
@@ -32,9 +31,19 @@ export class CarRidesController {
     return this.carRidesService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCarRideDto: UpdateCarRideDto) {
-    return this.carRidesService.update(+id, updateCarRideDto);
+  @Post('/take')
+  takeCarRide(@Body() takeCarRideDto: TakeCarRideDto) {
+    return this.carRidesService.takeCarRide(takeCarRideDto);
+  }
+
+  @Post('/cancel')
+  cancelCarRide(@Body() takeCarRideDto: TakeCarRideDto) {
+    return this.carRidesService.cancelCarRide(takeCarRideDto);
+  }
+
+  @Get('/myrides/:id')
+  findByUser(@Param('id') id: string) {
+    return this.carRidesService.findByUser(id);
   }
 
   @Delete(':id')

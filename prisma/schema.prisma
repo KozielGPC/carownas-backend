@@ -43,7 +43,7 @@ model CarRide {
 
   filled_spots Int @default(0) @db.Integer
 
-  passagers Int[]
+  passagers String[]
 
   rider User @relation(fields: [rider_ra], references: [ra])
 

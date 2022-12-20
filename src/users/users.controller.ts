@@ -12,6 +12,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { LogoffDto } from './dto/logoff.dto';
+import { RateDto } from './dto/rate.dto';
 
 @Controller('users')
 export class UsersController {
@@ -30,6 +31,11 @@ export class UsersController {
   @Post('/logoff')
   async logoff(@Body() data: LogoffDto) {
     return this.usersService.logoff(data);
+  }
+
+  @Post('/rate')
+  async rate(@Body() data: RateDto) {
+    return this.usersService.rate(data);
   }
 
   @Get()
